@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
   currentOperation: {
     color: 'white',
     fontSize: 60,
+    marginBottom: 10,
     textAlign: 'right'
   },
   prevOperation: {

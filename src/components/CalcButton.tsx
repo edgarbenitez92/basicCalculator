@@ -1,14 +1,9 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { calcButton } from '../styles/calcButton';
+import { CalcButtonProps } from '../interfaces/calcButton.interface';
 
-interface Props {
-  task: string;
-  color?: string;
-  isZeroButton?: boolean;
-}
-
-export const CalcButton = ({ task, color = '#2D2D2D', isZeroButton = false }: Props) => {
+export const CalcButton = ({ task, color = '#2D2D2D', isZeroButton = false }: CalcButtonProps) => {
   return (
     <View
       style={{
