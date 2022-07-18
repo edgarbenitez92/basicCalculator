@@ -51,6 +51,22 @@ export const CalculatorScreen = () => {
     }
   }
 
+  const simpleClear = () => {
+    let isNegative = '';
+    let numberTemp = operation;
+
+    if (operation.includes('-')) {
+      isNegative = '-';
+      numberTemp = operation.substring(1);
+    }
+
+    if (numberTemp.length > 1) {
+      setOperation(isNegative + numberTemp.slice(0, -1));
+    } else {
+      setOperation('0');
+    }
+  }
+
   return (
     <View style={styles.calculatorContainer}>
       <Text style={styles.prevOperation}>{recordOperation}</Text>
@@ -66,7 +82,7 @@ export const CalculatorScreen = () => {
       <View style={styles.rowButtons}>
         <CalcButton task='C' color='#9B9B9B' action={resetOperation} />
         <CalcButton task='+/-' color='#9B9B9B' action={changeTypeNumber} />
-        <CalcButton task='del' color='#9B9B9B' action={resetOperation} />
+        <CalcButton task='del' color='#9B9B9B' action={simpleClear} />
         <CalcButton task='/' color='rbg(255, 174, 0)' action={resetOperation} />
       </View>
 
