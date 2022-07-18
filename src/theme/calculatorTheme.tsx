@@ -20,18 +20,9 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'right'
   },
-  button: {
-    backgroundColor: '#9B9B9B',
-    borderRadius: 100,
-    height: 80,
-    justifyContent: 'center',
-    width: 80
-  },
-  buttonLabel: {
-    color: 'black',
-    fontSize: 30,
-    fontWeight: '300',
-    padding: 10,
-    textAlign: 'center'
+  rowButtons: {
+    flexDirection: 'row',
+    marginBottom: 18,
+    paddingHorizontal: 10
   }
 });
