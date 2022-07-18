@@ -10,11 +10,29 @@ export const CalculatorScreen = () => {
   const [recordOperation, setRecordOperation] = useState('0');
   const lastOperationRef = useRef<MathematicalOperations>();
 
+  // Clear and clear functions
   const resetOperation = () => {
     setOperation('0');
     setRecordOperation('0');
   }
 
+  const simpleClear = () => {
+    let isNegative = '';
+    let numberTemp = operation;
+
+    if (operation.includes('-')) {
+      isNegative = '-';
+      numberTemp = operation.substring(1);
+    }
+
+    if (numberTemp.length > 1) {
+      setOperation(isNegative + numberTemp.slice(0, -1));
+    } else {
+      setOperation('0');
+    }
+  }
+
+  // Validations functions
   const setUpOperation = (pressedNumber: string) => {
 
     // Validation: Only 1 dot
@@ -64,6 +82,7 @@ export const CalculatorScreen = () => {
     }
   }
 
+  // Operations mathematical functions
   const btnSplit = () => {
     changeOpByRecordOp();
     lastOperationRef.current = MathematicalOperations.split;
@@ -84,20 +103,32 @@ export const CalculatorScreen = () => {
     lastOperationRef.current = MathematicalOperations.sum;
   }
 
-  const simpleClear = () => {
-    let isNegative = '';
-    let numberTemp = operation;
+  // Calc operation function
+  const executeCalc = () => {
+    const firstNumber = Number(operation);
+    const secondNumber = Number(recordOperation);
 
-    if (operation.includes('-')) {
-      isNegative = '-';
-      numberTemp = operation.substring(1);
+    if (firstNumber == 0) return operation;
+
+    switch (lastOperationRef.current) {
+      case MathematicalOperations.sum:
+        setOperation(`${firstNumber + secondNumber}`);
+        break;
+
+      case MathematicalOperations.subtract:
+        setOperation(`${secondNumber - firstNumber}`);
+        break;
+
+      case MathematicalOperations.multiply:
+        setOperation(`${firstNumber * secondNumber}`);
+        break;
+
+      case MathematicalOperations.split:
+        setOperation(`${secondNumber / firstNumber}`);
+        break;
     }
 
-    if (numberTemp.length > 1) {
-      setOperation(isNegative + numberTemp.slice(0, -1));
-    } else {
-      setOperation('0');
-    }
+    return setRecordOperation('0');
   }
 
   return (
@@ -140,9 +171,17 @@ export const CalculatorScreen = () => {
 
       {/* Row Buttons */}
       <View style={styles.rowButtons}>
+        <CalcButton task='1' action={setUpOperation} />
+        <CalcButton task='2' action={setUpOperation} />
+        <CalcButton task='3' action={setUpOperation} />
+        <CalcButton task='+' color='rbg(255, 174, 0)' action={btnSum} />
+      </View>
+
+      {/* Row Buttons */}
+      <View style={styles.rowButtons}>
         <CalcButton task='0' isZeroButton action={setUpOperation} />
         <CalcButton task='.' action={setUpOperation} />
-        <CalcButton task='=' color='rbg(255, 174, 0)' action={btnSum} />
+        <CalcButton task='=' color='rbg(255, 174, 0)' action={executeCalc} />
       </View>
     </View>
   )
