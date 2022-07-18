@@ -108,7 +108,7 @@ export const CalculatorScreen = () => {
     const firstNumber = Number(operation);
     const secondNumber = Number(recordOperation);
 
-    if (firstNumber == 0) return operation;
+    if (firstNumber == 0) return;
 
     switch (lastOperationRef.current) {
       case MathematicalOperations.sum:
