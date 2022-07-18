@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Text, View } from 'react-native'
 import { CalcButton } from '../components/CalcButton'
+import { MathematicalOperations } from '../interfaces/mathematicalOperations.interface'
 import { styles } from '../theme/calculatorTheme'
 
 export const CalculatorScreen = () => {
 
   const [operation, setOperation] = useState('0');
-  const [recordOperation, setRecordOperation] = useState('100');
+  const [recordOperation, setRecordOperation] = useState('0');
+  const lastOperationRef = useRef<MathematicalOperations>();
 
   const resetOperation = () => {
     setOperation('0');
+    setRecordOperation('0');
   }
 
   const setUpOperation = (pressedNumber: string) => {
@@ -43,12 +46,42 @@ export const CalculatorScreen = () => {
     }
   }
 
+  const changeOpByRecordOp = () => {
+    if (operation.endsWith('.')) {
+      setRecordOperation(operation.slice(0, 1));
+    } else {
+      setRecordOperation(operation)
+    }
+
+    setOperation('0');
+  }
+
   const changeTypeNumber = () => {
     if (operation.includes('-')) {
       setOperation(operation.replace('-', ''));
     } else {
       setOperation('-' + operation);
     }
+  }
+
+  const btnSplit = () => {
+    changeOpByRecordOp();
+    lastOperationRef.current = MathematicalOperations.split;
+  }
+
+  const btnMultiply = () => {
+    changeOpByRecordOp();
+    lastOperationRef.current = MathematicalOperations.multiply;
+  }
+
+  const btnSubtract = () => {
+    changeOpByRecordOp();
+    lastOperationRef.current = MathematicalOperations.subtract;
+  }
+
+  const btnSum = () => {
+    changeOpByRecordOp();
+    lastOperationRef.current = MathematicalOperations.sum;
   }
 
   const simpleClear = () => {
@@ -69,7 +102,10 @@ export const CalculatorScreen = () => {
 
   return (
     <View style={styles.calculatorContainer}>
-      <Text style={styles.prevOperation}>{recordOperation}</Text>
+      {
+        (recordOperation !== '0') &&
+        <Text style={styles.prevOperation}>{recordOperation}</Text>
+      }
       <Text
         style={styles.currentOperation}
         numberOfLines={1}
@@ -83,7 +119,7 @@ export const CalculatorScreen = () => {
         <CalcButton task='C' color='#9B9B9B' action={resetOperation} />
         <CalcButton task='+/-' color='#9B9B9B' action={changeTypeNumber} />
         <CalcButton task='del' color='#9B9B9B' action={simpleClear} />
-        <CalcButton task='/' color='rbg(255, 174, 0)' action={resetOperation} />
+        <CalcButton task='/' color='rbg(255, 174, 0)' action={btnSplit} />
       </View>
 
       {/* Row Buttons */}
@@ -91,7 +127,7 @@ export const CalculatorScreen = () => {
         <CalcButton task='7' action={setUpOperation} />
         <CalcButton task='8' action={setUpOperation} />
         <CalcButton task='9' action={setUpOperation} />
-        <CalcButton task='X' color='rbg(255, 174, 0)' action={setUpOperation} />
+        <CalcButton task='X' color='rbg(255, 174, 0)' action={btnMultiply} />
       </View>
 
       {/* Row Buttons */}
@@ -99,14 +135,14 @@ export const CalculatorScreen = () => {
         <CalcButton task='4' action={setUpOperation} />
         <CalcButton task='5' action={setUpOperation} />
         <CalcButton task='6' action={setUpOperation} />
-        <CalcButton task='-' color='rbg(255, 174, 0)' action={setUpOperation} />
+        <CalcButton task='-' color='rbg(255, 174, 0)' action={btnSubtract} />
       </View>
 
       {/* Row Buttons */}
       <View style={styles.rowButtons}>
         <CalcButton task='0' isZeroButton action={setUpOperation} />
         <CalcButton task='.' action={setUpOperation} />
-        <CalcButton task='=' color='rbg(255, 174, 0)' action={setUpOperation} />
+        <CalcButton task='=' color='rbg(255, 174, 0)' action={btnSum} />
       </View>
     </View>
   )
