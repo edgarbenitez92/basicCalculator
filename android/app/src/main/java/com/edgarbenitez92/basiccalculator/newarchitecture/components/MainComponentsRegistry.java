@@ -1,4 +1,5 @@
-package com.basiccalculator.newarchitecture.components;
+// package com.basiccalculator.newarchitecture.components;
+package com.edgarbenitez92.basiccalculator.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

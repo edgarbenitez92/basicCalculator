@@ -1,4 +1,5 @@
-package com.basiccalculator.newarchitecture.modules;
+// package com.basiccalculator.newarchitecture.modules;
+package com.edgarbenitez92.basiccalculator.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

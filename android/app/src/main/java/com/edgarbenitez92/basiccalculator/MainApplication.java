@@ -1,4 +1,8 @@
-package com.basiccalculator;
+// package com.basiccalculator;
+package com.edgarbenitez92.basiccalculator;
+
+// react-native-splash-screen >= 0.3.1
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,7 +13,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
-import com.basiccalculator.newarchitecture.MainApplicationReactNativeHost;
+import com.edgarbenitez92.basiccalculator.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -27,7 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
+          // packages.add(new SplashScreenReactPackage());
           return packages;
         }
 

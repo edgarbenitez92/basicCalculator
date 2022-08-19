@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 import { CalcButton } from '../components/CalcButton';
 import { useCalculator } from '../hooks/useCalculator';
 import { styles } from '../theme/calculatorTheme';
 
 export const CalculatorScreen = () => {
 
-  const { operationState, btnOperations, cleanClearOperation, createOperation } = useCalculator();
+  const {
+    operationState,
+    btnOperations,
+    cleanClearOperation,
+    createOperation
+  } = useCalculator();
 
   let { operation, recordOperation } = operationState;
   let { btnSplit, btnMultiply, btnSubtract, btnSum, changeTypeNumber } = btnOperations;
   let { simpleClear, resetOperation } = cleanClearOperation;
   let { setUpOperation, executeCalc } = createOperation;
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
 
   return (
     <View style={styles.calculatorContainer}>
