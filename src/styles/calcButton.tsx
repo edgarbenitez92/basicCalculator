@@ -1,13 +1,14 @@
 import { StyleSheet } from "react-native";
 
 
-export const calcButton = StyleSheet.create({
+export const calcButtonStyles = StyleSheet.create({
   button: {
+    height: 80,
+    width: 80,
     backgroundColor: '#9B9B9B',
     borderRadius: 100,
-    height: 80,
     justifyContent: 'center',
-    width: 80
+    marginHorizontal: 8
   },
   buttonLabel: {
     color: 'black',

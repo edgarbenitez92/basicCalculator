@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
   },
   rowButtons: {
     flexDirection: 'row',
+    justifyContent: 'center',
     marginBottom: 18,
     paddingHorizontal: 10
   }
